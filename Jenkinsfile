@@ -27,6 +27,11 @@ pipeline {
               sh "mvn test -DskipTests=true"
         }
      }
+     stage('File System Scan') {
+        steps {
+              sh "trivy fs --format table -o trivy-fs-report.html ."
+        }
+     }
  
      stage('SonarQube Analysis') {
         steps {
