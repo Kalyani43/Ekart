@@ -12,7 +12,7 @@ pipeline {
   stages {
       stage('Git Checkout') {
           steps {
-              git branch: 'main', url:'https://github.com/jaiswaladi246/Ekart.git'
+              git branch: 'main', url:'https://github.com/Kalyani43/Ekart.git'
                 }
      }
  
@@ -61,7 +61,7 @@ pipeline {
      steps {
            script {
                   withDockerRegistry(credentialsId: 'docker-cred', toolName:'docker') {
-                  sh "docker build -t adijaiswal/ekart:latest -f docker/Dockerfile ."
+                  sh "docker build -t kalyani43/ekart:latest -f docker/Dockerfile ."
                   }
            }
            }
@@ -69,7 +69,7 @@ pipeline {
  
   stage('Trivy Scan') {
      steps {
-           sh "trivy image adijaiswal/ekart:latest > trivy-report.txt "
+           sh "trivy image kalyani43/ekart:latest > trivy-report.txt "
      }
   }
  
@@ -77,7 +77,7 @@ pipeline {
      steps {
            script {
             withDockerRegistry(credentialsId: 'docker-cred', toolName:'docker') {
-            sh "docker push adijaiswal/ekart:latest"
+            sh "docker push kalyani43/ekart:latest"
               }
             }
            }
